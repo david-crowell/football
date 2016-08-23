@@ -48,18 +48,12 @@ var fourThreePlayers = [
 ]
 
 function test() {
-    // var leftTackle = new Player({'speed': 50, 'power': 45, 'position': 'LT'});
-    // var weakEnd = new Player({'speed': 50, 'power': 55, 'position': 'WDE'});
-    // var gap = new Gap('LC', [leftTackle], [weakEnd]);
-
-    // var result = gap.getWinner();
     var offense = new Play(twoTightEndPlayers, runLeftAssignments);
     var defense = new Play(fourThreePlayers, fourThreeAssignments);
 
     var judge = new Judge(offense, defense);
     var yardage = judge.yardsInGap('LD');
 
-    console.log(yardage);
     return yardage
 }
 test();

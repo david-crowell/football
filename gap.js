@@ -1,4 +1,5 @@
 var Random = require('simjs-random');
+var Settings = require('./settings');
 
 var GAP_NAMES = ['LD', 'LC', 'LB', 'LA', 'RA', 'RB', 'RC', 'RD'];
 var OFFENSE = 1;
@@ -20,13 +21,13 @@ Gap.prototype.DEFENSE = -1;
 Gap.prototype.calculate = function() {
     var offensePower = 0;
     for (var i = this.offensePlayers.length - 1; i >= 0; i--) {
-        console.log('offensive player: ' + this.offensePlayers[i].position + ' ' + this.offensePlayers[i].getPower());
+        Settings.log('offensive player: ' + this.offensePlayers[i].position + ' ' + this.offensePlayers[i].getPower());
         offensePower += this.offensePlayers[i].getPower();
     };
 
     var defensePower = 0;
     for (var i = this.defensePlayers.length - 1; i >= 0; i--) {
-        console.log('defensive player: ' + this.defensePlayers[i].position + ' ' + this.defensePlayers[i].getPower());
+        Settings.log('defensive player: ' + this.defensePlayers[i].position + ' ' + this.defensePlayers[i].getPower());
         defensePower += this.defensePlayers[i].getPower();
     };
 
@@ -36,25 +37,28 @@ Gap.prototype.getWinner = function() {
     if (this.winner !== undefined) {
         return this.winner;
     }
+    Settings.log("Gap: " + this.name);
     if (this.offensePlayers.length == 0) {
-        this.winner = OFFENSE;
-    } else if (this.defensePlayers.length == 0) {
         this.winner = DEFENSE;
+    } else if (this.defensePlayers.length == 0) {
+        this.winner = OFFENSE;
     } else {
-        console.log("Gap: " + this.name);
         var difference = this.calculate();
-        console.log("Difference: " + difference);
         var random = this.getRandom();
-        console.log("Random: " + random);
         var modified = (random + difference);
-        console.log("Modified: " + modified);
+        Settings.log("Difference: " + difference);
+        Settings.log("Random: " + random);
+        Settings.log("Modified: " + modified);
         if (modified > 0) {
-            console.log("Offense wins!");
             this.winner = OFFENSE;
         } else {
-            console.log("Defense wins!");
             this.winner =  DEFENSE;
         }
+    }
+    if (this.winner == OFFENSE) {
+        Settings.log("Offense wins!");
+    } else {
+        Settings.log("Defense wins!");
     }
     return this.winner;
 }
