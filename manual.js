@@ -22,7 +22,7 @@ var fourThreeAssignments = {
     'MLB': 'RA',
     'SLB': 'RD',
     'WS': 'LD',
-    'SS': '-'
+    'SS': Play.NO_ASSIGNMENT
 };
 
 var twoTightEndPlayers = [
@@ -57,10 +57,9 @@ function test() {
     var defense = new Play(fourThreePlayers, fourThreeAssignments);
 
     var judge = new Judge(offense, defense);
-    var winners = judge.findWinners();
+    var yardage = judge.yardsInGap('LD');
 
-    console.log(winners);
-
-    return winners;
+    console.log(yardage);
+    return yardage
 }
 test();

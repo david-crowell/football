@@ -1,0 +1,14 @@
+{
+  "name": "football",
+  "version": "0.0.1",
+  "description": "Football",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Crowell",
+  "license": "ISC",
+  "dependencies": {
+    "simjs-random": "0.2.6"
+  }
+}

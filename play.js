@@ -1,10 +1,14 @@
 var OFFENSE = 1;
 var DEFENSE = -1;
+var NO_ASSIGNMENT = '-';
 // assignments = { positionName: gapName }
 var Play = function(players, assignments) {
     this.players = players;
     this.assignments = assignments;
     return this;
+}
+Play.prototype.unassignedPlayers = function() {
+    return this.playersInGap(NO_ASSIGNMENT);s
 }
 Play.prototype.playersInGap = function(gapName) {
     var positions = this.positionsInGap(gapName);
@@ -35,4 +39,6 @@ Play.OFFENSE = OFFENSE
 Play.prototype.OFFENSE = OFFENSE;
 Play.DEFENSE = DEFENSE;
 Play.prototype.DEFENSE = DEFENSE;
+Play.NO_ASSIGNMENT = NO_ASSIGNMENT;
+Play.prototype.NO_ASSIGNMENT = NO_ASSIGNMENT;
 module.exports = Play;

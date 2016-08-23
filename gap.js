@@ -1,3 +1,5 @@
+var Random = require('simjs-random');
+
 var GAP_NAMES = ['LD', 'LC', 'LB', 'LA', 'RA', 'RB', 'RC', 'RD'];
 var OFFENSE = 1;
 var DEFENSE = -1;
@@ -56,10 +58,8 @@ Gap.prototype.getWinner = function() {
     }
     return this.winner;
 }
-
-//Between -25 and +25
 Gap.prototype.getRandom = function() {
-    return 50 * (0.5 - (Math.random()));
+    return (new Random()).normal(0, 8);
 }
 
 module.exports = Gap;
