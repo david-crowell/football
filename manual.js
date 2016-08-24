@@ -32,7 +32,7 @@ var twoTightEndPlayers = [
     new Player({'position': 'C', speed: 20, power: 80}),
     new Player({'position': 'RG', speed: 15, power: 85}),
     new Player({'position': 'RT', speed: 20, power: 80}),
-    new Player({'position': 'RTE', speed: 50, power: 50})
+    new Player({'position': 'RTE', speed: 60, power: 60})
 ]
 
 var fourThreePlayers = [
