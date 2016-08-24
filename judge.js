@@ -37,7 +37,7 @@ Judge.prototype.yardsForDistance = function(gapDistance) {
     if (gapDistance == DEFENSE_NEVER_WINS) {
         yardage = 50;
     } else {
-        yardage = (4 * (gapDistance - 1) + ((Math.floor(Math.random() * 100)) % 4));
+        yardage = (4 * (gapDistance - 1) + ((Math.floor(Math.random() * 100)) % 4)) + 1;
         if (gapDistance == 0) {
             yardage += 2;
         }

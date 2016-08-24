@@ -1,5 +1,6 @@
 var Play = require('./play');
 var Player = require('./player');
+var Team = require('./team');
 
 var runLeftAssignments = {
     'LTE': 'LD',
@@ -13,6 +14,16 @@ var runLeftAssignments = {
 
 var runRightAssignments = {
     'LTE': 'LC',
+    'LT': 'LB',
+    'LG': 'LA',
+    'C': 'RA',
+    'RG': 'RB',
+    'RT': 'RC',
+    'RTE': 'RD'
+};
+
+var rbIformationAssignments = {
+    'FB': 'RB',
     'LT': 'LB',
     'LG': 'LA',
     'C': 'RA',
@@ -45,42 +56,21 @@ var fourThreeUnderAssignments = {
     'SS': Play.NO_ASSIGNMENT
 };
 
-var twoTightEndPlayers = [
-    new Player({'position': 'LTE', speed: 50, power: 50}),
-    new Player({'position': 'LT', speed: 25, power: 75}),
-    new Player({'position': 'LG', speed: 15, power: 80}),
-    new Player({'position': 'C', speed: 20, power: 80}),
-    new Player({'position': 'RG', speed: 15, power: 85}),
-    new Player({'position': 'RT', speed: 20, power: 80}),
-    new Player({'position': 'RTE', speed: 60, power: 60})
-]
-
-var fourThreePlayers = [
-    new Player({'position': 'WDE', speed: 50, power: 70}),
-    new Player({'position': 'WDT', speed: 25, power: 85}),
-    new Player({'position': 'SDT', speed: 15, power: 95}),
-    new Player({'position': 'SDE', speed: 20, power: 75}),
-    new Player({'position': 'WLB', speed: 75, power: 50}),
-    new Player({'position': 'MLB', speed: 70, power: 60}),
-    new Player({'position': 'SLB', speed: 65, power: 60}),
-    new Player({'position': 'WS', speed: 80, power: 50}),
-    new Player({'position': 'FS', speed: 80, power: 40})
-]
-
 module.exports = {};
 
 module.exports.offense = {
-    leftA: new Play(twoTightEndPlayers, runLeftAssignments, 'LA'),
-    leftB: new Play(twoTightEndPlayers, runLeftAssignments, 'LB'),
-    leftC: new Play(twoTightEndPlayers, runLeftAssignments, 'LC'),
-    leftD: new Play(twoTightEndPlayers, runLeftAssignments, 'LD'),
-    rightA: new Play(twoTightEndPlayers, runRightAssignments, 'RA'),
-    rightB: new Play(twoTightEndPlayers, runRightAssignments, 'RB'),
-    rightC: new Play(twoTightEndPlayers, runRightAssignments, 'RC'),
-    rightD: new Play(twoTightEndPlayers, runRightAssignments, 'RD')
+    leftA: function(team){ return new Play(team.offense, runLeftAssignments, 'LA'); },
+    leftB: function(team){ return new Play(team.offense, runLeftAssignments, 'LB'); },
+    leftC: function(team){ return new Play(team.offense, runLeftAssignments, 'LC'); },
+    leftD: function(team){ return new Play(team.offense, runLeftAssignments, 'LD'); },
+    rightA: function(team){ return new Play(team.offense, runRightAssignments, 'RA'); },
+    rightB: function(team){ return new Play(team.offense, runRightAssignments, 'RB'); },
+    rightC: function(team){ return new Play(team.offense, runRightAssignments, 'RC'); },
+    rightD: function(team){ return new Play(team.offense, runRightAssignments, 'RD'); },
+    iRight: function(team){ return new Play(team.offense, rbIformationAssignments, 'RB'); }
 }
 
 module.exports.defense = {
-    fourThreeOver: new Play(fourThreePlayers, fourThreeOverAssignments),
-    fourThreeUnder: new Play(fourThreePlayers, fourThreeUnderAssignments)
+    fourThreeOver: function(team){ return new Play(team.defense, fourThreeOverAssignments); },
+    fourThreeUnder: function(team){ return new Play(team.defense, fourThreeUnderAssignments); }
 }
