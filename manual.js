@@ -47,13 +47,41 @@ var fourThreePlayers = [
     new Player({'position': 'FS', speed: 80, power: 40})
 ]
 
-function test() {
+function runAt(gapName) {
     var offense = new Play(twoTightEndPlayers, runLeftAssignments);
     var defense = new Play(fourThreePlayers, fourThreeAssignments);
-
     var judge = new Judge(offense, defense);
-    var yardage = judge.yardsInGap('LD');
+    var yardage = judge.yardsInGap(gapName);
+    return yardage;
+}
 
-    return yardage
+function randomSelect(array) {
+    var i = Math.floor(Math.random() * 1000) % array.length;
+    return array[i];
+}
+
+function test() {
+    var scrimmage = 20;
+    var target = 30;
+    var down = 1;
+    while (down <= 4 && scrimmage < 100) {
+        var gapName = randomSelect(Gap.GAP_NAMES);
+        var yards = runAt(gapName);
+        console.log(down + " and " + (target - scrimmage) + " from the " + scrimmage);
+        console.log(yards + " yards running at " + gapName);
+        scrimmage += yards;
+        if (scrimmage >= target) {
+            target = Math.min(scrimmage + 10, 100);
+            down = 1;
+            console.log("FIRST DOWN!");
+        } else {
+            down += 1;
+        }
+    };
+    if (scrimmage >= 100) {
+        console.log("TOUCHDOWN!");
+    } else if (down > 4) {
+        console.log("TURNOVER ON DOWNS!");
+    }
 }
 test();

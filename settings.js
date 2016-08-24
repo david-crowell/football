@@ -1,5 +1,5 @@
 var Settings = {
-    debug: true,
+    debug: false,
     log: function(thing) {
         if (Settings.debug) {
             console.log(thing);
